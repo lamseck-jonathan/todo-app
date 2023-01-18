@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
+
+Route::get('/home', [App\Http\Controllers\TaskController::class, 'index'])->name('home');
+
+Route::post('/tasks', [App\Http\Controllers\TaskController::class, 'store'])->name('store');
+Route::delete('/tasks/{task:id}', [App\Http\Controllers\TaskController::class, 'delete'])->name('delete');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/login', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
